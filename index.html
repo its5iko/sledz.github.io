@@ -21,8 +21,7 @@ button:active { transform: scale(0.9); }
 #currency { margin-top:20px; font-size:1.3em; }
 #upgrades { margin-top:20px; font-size:1em; display:flex; flex-wrap:wrap; justify-content:center; }
 #upgrades button { margin:5px; }
-#inventory, #history, #cooldownDisplay { margin-top:15px; font-size:1.1em; }
-#history { max-height:200px; overflow-y:auto; border:1px solid #555; padding:10px; border-radius:10px; width:90%; margin:10px auto; background-color:#222; }
+#cooldownDisplay { margin-top:15px; font-size:1.1em; }
 
 #stats { position:fixed; top:10px; right:10px; background-color:#222; border:1px solid #555; padding:10px; border-radius:10px; text-align:left; width:250px; font-size:0.9em; }
 
@@ -80,23 +79,22 @@ button:active { transform: scale(0.9); }
 .codeHistory h3 { color:#673AB7; margin-top:0; }
 .codeHistoryItem { padding:8px; margin:5px 0; background:#444; border-radius:5px; border-left:3px solid #4CAF50; }
 
-/* Custom Popup */
 .custom-popup {
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: #222;
-border: 2px solid #4CAF50;
-border-radius: 15px;
-padding: 30px 40px;
-font-size: 1.3em;
-z-index: 2000;
-opacity: 1;
-transition: opacity 0.5s ease;
-box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-text-align: center;
-min-width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  border: 2px solid #4CAF50;
+  border-radius: 15px;
+  padding: 30px 40px;
+  font-size: 1.3em;
+  z-index: 2000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  text-align: center;
+  min-width: 300px;
 }
 .custom-popup.error { border-color: #f44336; box-shadow: 0 0 20px rgba(244, 67, 54, 0.5); }
 .custom-popup.success { border-color: #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); }
@@ -108,11 +106,11 @@ min-width: 300px;
 <h1>Śledź RNG</h1>
 
 <div id="stats">
-<div>Monety: <span id="statsCoins">0</span></div>
-<div>Autorzy: KoleszkaPP i its4iko</div>
-<div>Play Time: <span id="statsPlayTime">0s</span></div>
-<div>Łączne losowania: <span id="statsRolls">0</span></div>
-<div>Mnożnik szczęścia: <span id="statsLuck">1.00x</span></div>
+  <div>Monety: <span id="statsCoins">0</span></div>
+  <div>Autorzy: KoleszkaPP i its4iko</div>
+  <div>Play Time: <span id="statsPlayTime">0s</span></div>
+  <div>Łączne losowania: <span id="statsRolls">0</span></div>
+  <div>Mnożnik szczęścia: <span id="statsLuck">1.00x</span></div>
 </div>
 
 <img id="resultImage" src="photo.png" alt="Result">
@@ -133,98 +131,91 @@ min-width: 300px;
 <button id="codesButton">🎁 KODY</button>
 
 <div id="upgrades">
-<button class="upgradeButton" id="shortenCooldown">Skróć cooldown (-0.5s) 50 monet</button>
-<button class="upgradeButton" id="increaseChances">Ulepszenie szans 100 monet</button>
-<button class="upgradeButton" id="buyItem">Kup Tajemniczy Przedmiot 100 monet</button>
-<button class="upgradeButton" id="toggleAutoRoll">Włącz Auto-Roll 5000 monet</button>
+  <button class="upgradeButton" id="shortenCooldown">Skróć cooldown (-0.5s) 50 monet</button>
+  <button class="upgradeButton" id="increaseChances">Ulepszenie szans 100 monet</button>
+  <button class="upgradeButton" id="buyItem">Kup Tajemniczy Przedmiot 100 monet</button>
+  <button class="upgradeButton" id="toggleAutoRoll">Włącz Auto-Roll 5000 monet</button>
 </div>
-
-<div id="inventory">Ekwipunek: brak</div>
-<div id="history">Historia losowań:</div>
 
 <div id="resetProgress">RESET PROGRESS</div>
 
-<!-- Reset overlay -->
 <div id="resetOverlay">
-<div id="resetBox">
-<p>Czy na pewno chcesz zresetować progres?</p>
-<button id="resetYes">Tak</button>
-<button id="resetNo">Nie</button>
-</div>
+  <div id="resetBox">
+    <p>Czy na pewno chcesz zresetować progres?</p>
+    <button id="resetYes">Tak</button>
+    <button id="resetNo">Nie</button>
+  </div>
 </div>
 
-<!-- Shop overlay -->
 <div id="shopOverlay">
-<div id="shopBox">
-<h2>🛒 SKLEP ŚLEDZIKÓW</h2>
-<p style="color:#ccc;">Zbieraj wylosowane Śledźki i wymień je na potężne ulepszenia!</p>
+  <div id="shopBox">
+    <h2>🛒 SKLEP ŚLEDZIKÓW</h2>
+    <p style="color:#ccc;">Zbieraj wylosowane Śledźki i wymień je na potężne ulepszenia!</p>
+    
+    <div class="shopItem">
+      <h3>Lucky Śledź 🍀</h3>
+      <p>Mnożnik szczęścia: <strong>1.5x</strong></p>
+      <p>Wymagane:</p>
+      <ul style="text-align:left;">
+        <li>gej śledź: <span id="req1">0</span>/20</li>
+        <li>śledź femboy: <span id="req2">0</span>/10</li>
+        <li>Monety: <span id="req3">0</span>/1000</li>
+      </ul>
+      <button id="buyLuckySledz">Kup Lucky Śledź</button>
+    </div>
 
-<div class="shopItem" id="luckyŚleItem">
-<h3>Lucky Pawel 🍀</h3>
-<p>Mnożnik szczęścia: <strong>1.5x</strong></p>
-<p>Wymagane:</p>
-<ul style="text-align:left;">
-<li> Śledź: <span id="req1">0</span>/20</li>
-<li>Śledź prezydent: <span id="req2">0</span>/10</li>
-<li>Monety: <span id="req3">0</span>/1000</li>
-</ul>
-<button id="buyLuckyŚledź>Kup Lucky Śledź</button>
+    <div class="shopItem">
+      <h3>Mega Śledź 💎</h3>
+      <p>Mnożnik szczęścia: <strong>2x</strong></p>
+      <p>Wymagane:</p>
+      <ul style="text-align:left;">
+        <li>śledź nwm: <span id="req4">0</span>/25</li>
+        <li>patrzący śledź: <span id="req5">0</span>/15</li>
+        <li>Monety: <span id="req6">0</span>/2500</li>
+      </ul>
+      <button id="buyMegaSledz">Kup Mega Śledź</button>
+    </div>
+
+    <div class="shopItem">
+      <h3>Ultimate Śledź 👑</h3>
+      <p>Mnożnik szczęścia: <strong>3x</strong></p>
+      <p>Wymagane:</p>
+      <ul style="text-align:left;">
+        <li>śledź anime: <span id="req7">0</span>/50</li>
+        <li>kontroler śledź: <span id="req8">0</span>/20</li>
+        <li>śledź 67: <span id="req9">0</span>/2</li>
+        <li>śledź problem: <span id="req10">0</span>/1</li>
+        <li>Monety: <span id="req11">0</span>/5000</li>
+      </ul>
+      <button id="buyUltimateSledz">Kup Ultimate Śledź</button>
+    </div>
+
+    <button id="closeShop">Zamknij sklep</button>
+  </div>
 </div>
 
-<div class="shopItem" id="megaPawelItem">
-<h3>Mega Śledź 💎</h3>
-<p>Mnożnik szczęścia: <strong>2x</strong></p>
-<p>Wymagane:</p>
-<ul style="text-align:left;">
-<li>Śledź w zoltym hoodie: <span id="req4">0</span>/25</li>
-<li>funni Śledź: <span id="req5">0</span>/15</li>
-<li>Monety: <span id="req6">0</span>/2500</li>
-</ul>
-<button id="buyMegaŚledź">Kup Mega Śledź</button>
-</div>
-
-<div class="shopItem" id="ultimateŚledźItem">
-<h3>Ultimate Śledź 👑</h3>
-<p>Mnożnik szczęścia: <strong>3x</strong></p>
-<p>Wymagane:</p>
-<ul style="text-align:left;">
-<li>Śledź ok: <span id="req7">0</span>/50</li>
-<li>świąteczny Śledź: <span id="req8">0</span>/20</li>
-<li>Śledź dostaje backshoty: <span id="req9">0</span>/2</li>
-<li>Śledź komunista: <span id="req10">0</span>/1</li>
-<li>Monety: <span id="req11">0</span>/5000</li>
-</ul>
-<button id="buyUltimateŚledź">Kup Ultimate Śledź</button>
-</div>
-
-<button id="closeShop">Zamknij sklep</button>
-</div>
-</div>
-
-<!-- Quests overlay -->
 <div id="questsOverlay">
-<div id="questsBox">
-<h2>📋 QUESTY</h2>
-<p style="color:#ccc;">Wykonuj questy aby zdobyć dodatkowe nagrody!</p>
-<div id="questsList"></div>
-<button id="closeQuests">Zamknij questy</button>
-</div>
+  <div id="questsBox">
+    <h2>📋 QUESTY</h2>
+    <p style="color:#ccc;">Wykonuj questy aby zdobyć dodatkowe nagrody!</p>
+    <div id="questsList"></div>
+    <button id="closeQuests">Zamknij questy</button>
+  </div>
 </div>
 
-<!-- Codes overlay -->
 <div id="codesOverlay">
-<div id="codesBox">
-<h2>🎁 KODY PROMOCYJNE</h2>
-<p style="color:#ccc;">Wpisz kod aby otrzymać ekskluzywne nagrody!</p>
-<input type="text" id="codeInput" placeholder="WPISZ KOD TUTAJ" maxlength="50">
-<br>
-<button id="submitCode">Aktywuj Kod</button>
-<button id="closeCodes">Zamknij</button>
-<div class="codeHistory">
-<h3>Użyte kody:</h3>
-<div id="usedCodesList">Brak użytych kodów</div>
-</div>
-</div>
+  <div id="codesBox">
+    <h2>🎁 KODY PROMOCYJNE</h2>
+    <p style="color:#ccc;">Wpisz kod aby otrzymać ekskluzywne nagrody!</p>
+    <input type="text" id="codeInput" placeholder="WPISZ KOD TUTAJ" maxlength="50">
+    <br>
+    <button id="submitCode">Aktywuj Kod</button>
+    <button id="closeCodes">Zamknij</button>
+    <div class="codeHistory">
+      <h3>Użyte kody:</h3>
+      <div id="usedCodesList">Brak użytych kodów</div>
+    </div>
+  </div>
 </div>
 
 <div id="chanceList"></div>
@@ -232,49 +223,49 @@ min-width: 300px;
 <audio id="backgroundMusic"></audio>
 
 <script>
-// ===== DANE =====
 const images = [
-{src:'photo.png',text:'gej Śledź',chance:1/2,rarity:'Common',reward:1},
-{src:'photo2.png',text:'Śledź femboy',chance:1/4,rarity:'Uncommon',reward:5},
-{src:'photo3.png',text:'Śledz nwm',chance:1/8,rarity:'Rare',reward:10},
-{src:'photo4.png',text:'patrzący Śledź',chance:1/16,rarity:'Epic',reward:20},
-{src:'photo5.png',text:'Śledź anime',chance:1/32,rarity:'Mythic',reward:40},
-{src:'photo6.png',text:'kontroler Śledź',chance:1/64,rarity:'Legendary',reward:80},
-{src:'photo7.png',text:'Śledź 67',chance:1/128,rarity:'Ultra Legendary',reward:160},
-{src:'photo8.png',text:'Śledź problem,chance:1/256,rarity:'Ultra Legendary',reward:320},
-{src:'photo9.png',text:'Śledziu język',chance:1/100000000,rarity:'Secret',reward:10000,requiresItem:'Tajemniczy Przedmiot'}
+  {src:'photo.png',text:'gej śledź',chance:1/2,rarity:'Common',reward:1},
+  {src:'photo2.png',text:'śledź femboy',chance:1/4,rarity:'Uncommon',reward:5},
+  {src:'photo3.png',text:'śledź nwm',chance:1/8,rarity:'Rare',reward:10},
+  {src:'photo4.png',text:'patrzący śledź',chance:1/16,rarity:'Epic',reward:20},
+  {src:'photo5.png',text:'śledź anime',chance:1/32,rarity:'Mythic',reward:40},
+  {src:'photo6.png',text:'kontroler śledź',chance:1/64,rarity:'Legendary',reward:80},
+  {src:'photo7.png',text:'śledź 67',chance:1/128,rarity:'Ultra Legendary',reward:160},
+  {src:'photo8.png',text:'śledź problem',chance:1/256,rarity:'Ultra Legendary',reward:320},
+  {src:'photo9.png',text:'śledziu język',chance:1/100000000,rarity:'Secret',reward:10000,requiresItem:'Tajemniczy Przedmiot'}
 ];
 
-// ===== WCZYTYWANIE SZANS Z LOCALSTORAGE =====
 const savedChances = localStorage.getItem('imagesChances');
 if(savedChances){
-const chancesArr = JSON.parse(savedChances);
-images.forEach((img,i)=>{
-if(img.text !== 'Śledziu') {
-img.chance = chancesArr[i];
-}
-});
+  const chancesArr = JSON.parse(savedChances);
+  images.forEach((img,i)=>{
+    if(img.text !== 'śledziu język') {
+      img.chance = chancesArr[i];
+    }
+  });
 }
 
 const musicFiles = [
-'https://its5iko.github.io/sledz.github.io/music.mp3',
-'https://its5iko.github.io/sledz.github.io/music2.mp3',
-'https://its5iko.github.io/sledz.github.io/music3.mp3',
-'https://its5iko.github.io/sledz.github.io/music4.mp3',
-'https://its5iko.github.io/sledz.github.io/music5.mp3'
+  'https://its5iko.github.io/sledz.github.io/music.mp3',
+  'https://its5iko.github.io/sledz.github.io/music2.mp3',
+  'https://its5iko.github.io/sledz.github.io/music3.mp3',
+  'https://its5iko.github.io/sledz.github.io/music4.mp3',
+  'https://its5iko.github.io/sledz.github.io/music5.mp3'
 ];
 const bgMusic = document.getElementById('backgroundMusic');
 let musicStarted = false;
 let currentMusicIndex = 0;
 
-// Obsługa zakończenia utworu - automatyczne przełączanie
 bgMusic.addEventListener('ended', () => {
-currentMusicIndex = (currentMusicIndex + 1) % musicFiles.length;
-bgMusic.src = musicFiles[currentMusicIndex];
-bgMusic.play().catch(err => console.log(err));
+  currentMusicIndex = (currentMusicIndex + 1) % musicFiles.length;
+  bgMusic.src = musicFiles[currentMusicIndex];
+  bgMusic.play().catch(err => {});
 });
 
-// ===== ZMIENNE =====
+bgMusic.addEventListener('error', () => {
+  musicStarted = false;
+});
+
 let coins = localStorage.getItem('coins') !== null ? parseInt(localStorage.getItem('coins')) : 30;
 let inventory = localStorage.getItem('inventory') ? JSON.parse(localStorage.getItem('inventory')) : [];
 let historyData = localStorage.getItem('historyData') ? JSON.parse(localStorage.getItem('historyData')) : {};
@@ -282,320 +273,346 @@ let cooldown = localStorage.getItem('cooldown') !== null ? parseInt(localStorage
 let lastRoll = 0;
 let totalRolls = localStorage.getItem('totalRolls') !== null ? parseInt(localStorage.getItem('totalRolls')) : 0;
 let autoRollEnabled = localStorage.getItem('autoRollEnabled') !== null ? JSON.parse(localStorage.getItem('autoRollEnabled')) : false;
+let autoRollPurchased = localStorage.getItem('autoRollPurchased') !== null ? JSON.parse(localStorage.getItem('autoRollPurchased')) : false;
 let autoRollInterval = null;
 let playTime = localStorage.getItem('playTime') !== null ? parseInt(localStorage.getItem('playTime')) : 0;
-let playTimeStart = localStorage.getItem('playTimeStart') !== null ? parseInt(localStorage.getItem('playTimeStart')) : Date.now();
-
-// Mnożniki szczęścia ze sklepu
 let luckMultiplier = localStorage.getItem('luckMultiplier') !== null ? parseFloat(localStorage.getItem('luckMultiplier')) : 1;
 let ownedShopItems = localStorage.getItem('ownedShopItems') ? JSON.parse(localStorage.getItem('ownedShopItems')) : [];
 
-// Questy
 let quests = localStorage.getItem('quests') ? JSON.parse(localStorage.getItem('quests')) : [
-{id:1, name:'Początkujący Rollujący', desc:'Wykonaj 10 losowań', target:10, current:0, reward:50, type:'rolls', completed:false},
-{id:2, name:'Zbieracz Monet', desc:'Zgromadź 500 monet', target:500, current:0, reward:100, type:'coins', completed:false},
-{id:3, name:'Wspinaczka po Drabinie', desc:'Wylosuj 5 różnych Śledźków', target:5, current:0, reward:150, type:'unique', completed:false},
-{id:4, name:'Rollercoaster', desc:'Wykonaj 50 losowań', target:50, current:0, reward:200, type:'rolls', completed:false},
-{id:5, name:'Kolekcjoner Uncommon', desc:'Wylosuj 10x Śledź prezydent', target:10, current:0, reward:250, type:'item:Śledź prezydent', completed:false},
-{id:6, name:'Maraton Rollowania', desc:'Wykonaj 100 losowań', target:100, current:0, reward:500, type:'rolls', completed:false},
-{id:7, name:'Bogacz', desc:'Zgromadź 2000 monet', target:2000, current:0, reward:750, type:'coins', completed:false},
-{id:8, name:'Mistrz Rare', desc:'Wylosuj 5x pawel w zoltym hoodie', target:5, current:0, reward:400, type:'item:pawel w zoltym hoodie', completed:false},
-{id:9, name:'Epic Hunter', desc:'Wylosuj 3x funni Śledź', target:3, current:0, reward:600, type:'item:funni Śledź', completed:false},
-{id:10, name:'Legenda', desc:'Wykonaj 250 losowań', target:250, current:0, reward:1000, type:'rolls', completed:false},
-{id:11, name:'Mythic Seeker', desc:'Wylosuj 2x Śledź ok', target:2, current:0, reward:800, type:'item:Śledź ok', completed:false},
-{id:12, name:'Świąteczny Duch', desc:'Wylosuj 1x świąteczny Śledź', target:1, current:0, reward:1200, type:'item:świąteczny Śledź', completed:false},
-{id:13, name:'Ultra Gracz', desc:'Wykonaj 500 losowań', target:500, current:0, reward:2000, type:'rolls', completed:false},
-{id:14, name:'Magnat', desc:'Zgromadź 10000 monet', target:10000, current:0, reward:3000, type:'coins', completed:false},
-{id:15, name:'Mistrz RNG', desc:'Wylosuj wszystkie 9 Śledźków', target:9, current:0, reward:5000, type:'unique', completed:false}
+  {id:1, name:'Początkujący Rollujący', desc:'Wykonaj 10 losowań', target:10, current:0, reward:50, type:'rolls', completed:false},
+  {id:2, name:'Zbieracz Monet', desc:'Zgromadź 500 monet', target:500, current:0, reward:100, type:'coins', completed:false},
+  {id:3, name:'Wspinaczka po Drabinie', desc:'Wylosuj 5 różnych Śledźków', target:5, current:0, reward:150, type:'unique', completed:false},
+  {id:4, name:'Rollercoaster', desc:'Wykonaj 50 losowań', target:50, current:0, reward:200, type:'rolls', completed:false},
+  {id:5, name:'Kolekcjoner Uncommon', desc:'Wylosuj 10x śledź femboy', target:10, current:0, reward:250, type:'item:śledź femboy', completed:false},
+  {id:6, name:'Maraton Rollowania', desc:'Wykonaj 100 losowań', target:100, current:0, reward:500, type:'rolls', completed:false},
+  {id:7, name:'Bogacz', desc:'Zgromadź 2000 monet', target:2000, current:0, reward:750, type:'coins', completed:false},
+  {id:8, name:'Mistrz Rare', desc:'Wylosuj 5x śledź nwm', target:5, current:0, reward:400, type:'item:śledź nwm', completed:false},
+  {id:9, name:'Epic Hunter', desc:'Wylosuj 3x patrzący śledź', target:3, current:0, reward:600, type:'item:patrzący śledź', completed:false},
+  {id:10, name:'Legenda', desc:'Wykonaj 250 losowań', target:250, current:0, reward:1000, type:'rolls', completed:false},
+  {id:11, name:'Mythic Seeker', desc:'Wylosuj 2x śledź anime', target:2, current:0, reward:800, type:'item:śledź anime', completed:false},
+  {id:12, name:'Świąteczny Duch', desc:'Wylosuj 1x kontroler śledź', target:1, current:0, reward:1200, type:'item:kontroler śledź', completed:false},
+  {id:13, name:'Ultra Gracz', desc:'Wykonaj 500 losowań', target:500, current:0, reward:2000, type:'rolls', completed:false},
+  {id:14, name:'Magnat', desc:'Zgromadź 10000 monet', target:10000, current:0, reward:3000, type:'coins', completed:false},
+  {id:15, name:'Mistrz RNG', desc:'Wylosuj wszystkie 9 Śledźków', target:9, current:0, reward:5000, type:'unique', completed:false}
 ];
 
-// Kody promocyjne
+// Force update if quests contain old "Paweł" names
+if(quests.some(q => q.desc && q.desc.includes('Paweł'))) {
+  // Reset to default quests with Śledź names
+  quests = [
+    {id:1, name:'Początkujący Rollujący', desc:'Wykonaj 10 losowań', target:10, current:0, reward:50, type:'rolls', completed:false},
+    {id:2, name:'Zbieracz Monet', desc:'Zgromadź 500 monet', target:500, current:0, reward:100, type:'coins', completed:false},
+    {id:3, name:'Wspinaczka po Drabinie', desc:'Wylosuj 5 różnych Śledźków', target:5, current:0, reward:150, type:'unique', completed:false},
+    {id:4, name:'Rollercoaster', desc:'Wykonaj 50 losowań', target:50, current:0, reward:200, type:'rolls', completed:false},
+    {id:5, name:'Kolekcjoner Uncommon', desc:'Wylosuj 10x śledź femboy', target:10, current:0, reward:250, type:'item:śledź femboy', completed:false},
+    {id:6, name:'Maraton Rollowania', desc:'Wykonaj 100 losowań', target:100, current:0, reward:500, type:'rolls', completed:false},
+    {id:7, name:'Bogacz', desc:'Zgromadź 2000 monet', target:2000, current:0, reward:750, type:'coins', completed:false},
+    {id:8, name:'Mistrz Rare', desc:'Wylosuj 5x śledź nwm', target:5, current:0, reward:400, type:'item:śledź nwm', completed:false},
+    {id:9, name:'Epic Hunter', desc:'Wylosuj 3x patrzący śledź', target:3, current:0, reward:600, type:'item:patrzący śledź', completed:false},
+    {id:10, name:'Legenda', desc:'Wykonaj 250 losowań', target:250, current:0, reward:1000, type:'rolls', completed:false},
+    {id:11, name:'Mythic Seeker', desc:'Wylosuj 2x śledź anime', target:2, current:0, reward:800, type:'item:śledź anime', completed:false},
+    {id:12, name:'Świąteczny Duch', desc:'Wylosuj 1x kontroler śledź', target:1, current:0, reward:1200, type:'item:kontroler śledź', completed:false},
+    {id:13, name:'Ultra Gracz', desc:'Wykonaj 500 losowań', target:500, current:0, reward:2000, type:'rolls', completed:false},
+    {id:14, name:'Magnat', desc:'Zgromadź 10000 monet', target:10000, current:0, reward:3000, type:'coins', completed:false},
+    {id:15, name:'Mistrz RNG', desc:'Wylosuj wszystkie 9 Śledźków', target:9, current:0, reward:5000, type:'unique', completed:false}
+  ];
+  localStorage.setItem('quests', JSON.stringify(quests));
+}
+
 let usedCodes = localStorage.getItem('usedCodes') ? JSON.parse(localStorage.getItem('usedCodes')) : [];
 const promoCodes = {
-'SLEDZIUFEMBOY': 1000,
-'PAWEL': 100,
-'SUPERCALIFRAGILISTICEXPIALIDOCIOUS': 1500
+  'SLEDZIUFEMBOY': 1000,
+  'PAWEL': 100,
+  'SUPERCALIFRAGILISTICEXPIALIDOCIOUS': 1500
 };
 
-// ===== CUSTOM POPUP =====
 function showPopup(message, type = 'success') {
-const popup = document.createElement('div');
-popup.className = `custom-popup ${type}`;
-popup.textContent = message;
-document.body.appendChild(popup);
-
-setTimeout(() => {
-popup.classList.add('fadeout');
-}, 2000);
-
-setTimeout(() => {
-document.body.removeChild(popup);
-}, 2500);
+  const popup = document.createElement('div');
+  popup.className = `custom-popup ${type}`;
+  popup.textContent = message;
+  document.body.appendChild(popup);
+  
+  setTimeout(() => {
+    popup.classList.add('fadeout');
+  }, 2000);
+  
+  setTimeout(() => {
+    document.body.removeChild(popup);
+  }, 2500);
 }
 
-// ===== FUNKCJE =====
 function updateQuests() {
-// Aktualizuj postęp questów
-quests.forEach(q => {
-if(q.completed) return;
-
-if(q.type === 'rolls') {
-q.current = totalRolls;
-} else if(q.type === 'coins') {
-q.current = coins;
-} else if(q.type === 'unique') {
-q.current = Object.keys(historyData).length;
-} else if(q.type.startsWith('item:')) {
-const itemName = q.type.split(':')[1];
-q.current = historyData[itemName] || 0;
-}
-
-if(q.current >= q.target && !q.completed) {
-q.completed = true;
-coins += q.reward;
-showPopup(`✨ Quest ukończony: ${q.name}! +${q.reward} monet`, 'success');
-}
-});
-
-localStorage.setItem('quests', JSON.stringify(quests));
+  quests.forEach(q => {
+    if(q.completed) return;
+    
+    if(q.type === 'rolls') {
+      q.current = totalRolls;
+    } else if(q.type === 'coins') {
+      q.current = coins;
+    } else if(q.type === 'unique') {
+      q.current = Object.keys(historyData).length;
+    } else if(q.type.startsWith('item:')) {
+      const itemName = q.type.split(':')[1];
+      q.current = historyData[itemName] || 0;
+    }
+    
+    if(q.current >= q.target && !q.completed) {
+      q.completed = true;
+      coins += q.reward;
+      showPopup(`✨ Quest ukończony: ${q.name}! +${q.reward} monet`, 'success');
+    }
+  });
+  
+  localStorage.setItem('quests', JSON.stringify(quests));
 }
 
 function updateQuestsUI() {
-const questsList = document.getElementById('questsList');
-questsList.innerHTML = '';
-
-quests.forEach(q => {
-const questDiv = document.createElement('div');
-questDiv.className = `questItem${q.completed ? ' completed' : ''}`;
-
-const progress = Math.min(100, (q.current / q.target) * 100);
-
-questDiv.innerHTML = `
-${q.completed ? '<span class="checkmark">✓</span>' : ''}
-<h3>${q.name}</h3>
-<p>${q.desc}</p>
-<div class="progress">
-<div class="progressBar" style="width:${progress}%"></div>
-</div>
-<p>Postęp: ${q.current}/${q.target}</p>
-<p class="reward">Nagroda: ${q.reward} monet</p>
-`;
-
-questsList.appendChild(questDiv);
-});
+  const questsList = document.getElementById('questsList');
+  questsList.innerHTML = '';
+  
+  quests.forEach(q => {
+    const questDiv = document.createElement('div');
+    questDiv.className = `questItem${q.completed ? ' completed' : ''}`;
+    
+    const progress = Math.min(100, (q.current / q.target) * 100);
+    
+    questDiv.innerHTML = `
+      ${q.completed ? '<span class="checkmark">✓</span>' : ''}
+      <h3>${q.name}</h3>
+      <p>${q.desc}</p>
+      <div class="progress">
+        <div class="progressBar" style="width:${progress}%"></div>
+      </div>
+      <p>Postęp: ${q.current}/${q.target}</p>
+      <p class="reward">Nagroda: ${q.reward} monet</p>
+    `;
+    
+    questsList.appendChild(questDiv);
+  });
 }
 
 function updateUI(){
-document.getElementById('statsPlayTime').textContent = playTime+'s';
-document.getElementById('inventory').textContent = inventory.length?`Ekwipunek: ${inventory.join(', ')}`:'Ekwipunek: brak';
+  document.getElementById('statsPlayTime').textContent = playTime+'s';
+  
+  document.getElementById('coins').textContent = coins;
+  document.getElementById('statsCoins').textContent = coins;
+  document.getElementById('statsRolls').textContent = totalRolls;
+  document.getElementById('statsLuck').textContent = luckMultiplier.toFixed(2) + 'x';
 
-let historyHTML='';
-for(const[key,val] of Object.entries(historyData)){
-historyHTML+=`${key} (x${val})<br>`;
-}
-document.getElementById('history').innerHTML = historyHTML||'Historia losowań: brak';
+  const chanceList = document.getElementById('chanceList');
+  chanceList.innerHTML = 'Aktualne szanse:<br>';
+  images.forEach(img=>{
+    if(img.text === 'śledziu język') return;
+    chanceList.innerHTML += `${img.text}: ${(img.chance*100).toFixed(2)}%<br>`;
+  });
 
-document.getElementById('coins').textContent = coins;
-document.getElementById('statsCoins').textContent = coins;
-document.getElementById('statsRolls').textContent = totalRolls;
-document.getElementById('statsLuck').textContent = luckMultiplier.toFixed(2) + 'x';
+  updateQuests();
 
-// aktualizacja listy szans (bez Śledziu)
-const chanceList = document.getElementById('chanceList');
-chanceList.innerHTML = 'Aktualne szanse:<br>';
-images.forEach(img=>{
-if(img.text === 'Śledziu') return;
-chanceList.innerHTML += `${img.text}: ${(img.chance*100).toFixed(2)}%<br>`;
-});
-
-// Aktualizuj questy
-updateQuests();
-
-// zapis do localStorage
-localStorage.setItem('coins',coins);
-localStorage.setItem('inventory',JSON.stringify(inventory));
-localStorage.setItem('historyData',JSON.stringify(historyData));
-localStorage.setItem('cooldown',cooldown);
-localStorage.setItem('totalRolls',totalRolls);
+  localStorage.setItem('coins',coins);
+  localStorage.setItem('inventory',JSON.stringify(inventory));
+  localStorage.setItem('historyData',JSON.stringify(historyData));
+  localStorage.setItem('cooldown',cooldown);
+  localStorage.setItem('totalRolls',totalRolls);
 }
 
-// ===== COOLDOWN =====
 setInterval(()=>{
-const now=Date.now();
-const diff=lastRoll?Math.max(0,cooldown-(now-lastRoll)):0;
-document.getElementById('cooldownDisplay').textContent=`Cooldown: ${(diff/1000).toFixed(1)}s`;
+  const now=Date.now();
+  const diff=lastRoll?Math.max(0,cooldown-(now-lastRoll)):0;
+  document.getElementById('cooldownDisplay').textContent=`Cooldown: ${(diff/1000).toFixed(1)}s`;
 },100);
 
-// ===== ROLL =====
-function rollRNG(showRareAnimationOnly=false){
-const now=Date.now();
-if(now-lastRoll<cooldown) return;
-lastRoll=now;
-totalRolls++;
+function rollRNG(){
+  const now=Date.now();
+  if(now-lastRoll<cooldown) return;
+  lastRoll=now;
+  totalRolls++;
 
-// Oblicz szansę na Śledziu język - co 500 rolli daje boost do 1/100
-const sledzImage = images.find(img => img.text === 'Śledziu język');
-if(sledzImage) {
-// Jeśli liczba rolli jest wielokrotnością 500 (500, 1000, 1500...), szansa to 1/100
-if(totalRolls % 500 === 0 && totalRolls > 0) {
-sledzImage.chance = 1/100;
-} else {
-sledzImage.chance = 1/100000000; // Normalna ultra-rzadka szansa
+  const sledzImage = images.find(img => img.text === 'śledziu język');
+  if(sledzImage) {
+    if(totalRolls % 500 === 0 && totalRolls > 0) {
+      sledzImage.chance = 1/100;
+    } else {
+      sledzImage.chance = 1/100000000;
+    }
+  }
+
+  const entries=[];
+  images.forEach(img=>{
+    if(img.requiresItem && !inventory.includes(img.requiresItem)) return;
+
+    let count;
+    if(img.text === 'śledziu język') {
+      count = Math.floor(img.chance * 1000000);
+    } else {
+      count = Math.floor(img.chance * 1000000 * luckMultiplier);
+      if(inventory.length > 0) count = Math.floor(count * 1.05);
+    }
+    
+    for(let i = 0; i < count; i++) entries.push(img);
+  });
+
+  const imgElem=document.getElementById('resultImage');
+  const textElem=document.getElementById('resultText');
+  const chanceElem=document.getElementById('chanceText');
+  const rarityElem=document.getElementById('rarityText');
+
+  let elapsedAnim=0;
+  const animSpeed=50;
+  const totalDuration=1000;
+  const interval=setInterval(()=>{
+    const tempImages = images.filter(img => img.text !== 'śledziu język');
+    const temp = tempImages[Math.floor(Math.random()*tempImages.length)];
+
+    imgElem.src=temp.src;
+    textElem.textContent=temp.text;
+    if(temp.chance > 0) {
+      chanceElem.textContent=`Szansa: 1/${Math.round(1/temp.chance)}`;
+    } else {
+      chanceElem.textContent='Szansa: ???';
+    }
+    rarityElem.textContent=`Rzadkość: ${temp.rarity}`;
+    if(temp.rarity!=='Common' && temp.rarity!=='Uncommon'){
+      imgElem.style.transform=`scale(${1+Math.random()*0.2}) rotate(${(Math.random()-0.5)*20}deg)`;
+      imgElem.style.filter=`brightness(${1+Math.random()*0.5})`;
+    } else { 
+      imgElem.style.transform='scale(1) rotate(0deg)'; 
+      imgElem.style.filter='brightness(1)'; 
+    }
+
+    elapsedAnim+=animSpeed;
+    if(elapsedAnim>=totalDuration){
+      clearInterval(interval);
+      const selected=entries[Math.floor(Math.random()*entries.length)];
+      imgElem.src=selected.src;
+      textElem.textContent=selected.text;
+      if (selected.chance <= 0 || selected.chance > 1) {
+        chanceElem.textContent = 'Szansa: ???';
+      } else {
+        chanceElem.textContent = `Szansa: 1/${Math.round(1 / selected.chance)}`;
+      }
+
+      rarityElem.textContent=`Rzadkość: ${selected.rarity}`;
+      let reward=selected.reward;
+      if(inventory.length>0) reward=Math.floor(reward*(1+0.05*inventory.length));
+      coins+=reward;
+      if(historyData[selected.text]) historyData[selected.text]++;
+      else historyData[selected.text]=1;
+      imgElem.style.transform='scale(1) rotate(0deg)';
+      imgElem.style.filter='brightness(1)';
+      
+      if(selected.text === 'śledziu język') {
+        showPopup('🐟 WYLOSOWAŁEŚ ŚLEDZIA JĘZYK! 🐟', 'success');
+      }
+      
+      updateUI();
+    }
+  },animSpeed);
 }
-}
 
-const entries=[];
-images.forEach(img=>{
-if(img.requiresItem && !inventory.includes(img.requiresItem)) return;
-
-let count;
-if(img.text === 'Śledziu język') {
-// Śledź nie jest modyfikowany przez luck multiplier
-count = Math.floor(img.chance * 1000000);
-} else {
-count = Math.floor(img.chance * 1000000 * luckMultiplier);
-if(inventory.length > 0) count = Math.floor(count * 1.05);
-}
-
-for(let i = 0; i < count; i++) entries.push(img);
-});
-
-const imgElem=document.getElementById('resultImage');
-const textElem=document.getElementById('resultText');
-const chanceElem=document.getElementById('chanceText');
-const rarityElem=document.getElementById('rarityText');
-
-let elapsedAnim=0;
-const animSpeed=50;
-const totalDuration=1000;
-const interval=setInterval(()=>{
-// Wyklucz Śledzia z animacji
-const tempImages = images.filter(img => img.text !== 'Śledziu');
-const temp = tempImages[Math.floor(Math.random()*tempImages.length)];
-
-imgElem.src=temp.src;
-textElem.textContent=temp.text;
-if(temp.chance > 0) {
-chanceElem.textContent=`Szansa: 1/${Math.round(1/temp.chance)}`;
-} else {
-chanceElem.textContent='Szansa: ???';
-}
-rarityElem.textContent=`Rzadkość: ${temp.rarity}`;
-if(temp.rarity!=='Common' && temp.rarity!=='Uncommon'){
-imgElem.style.transform=`scale(${1+Math.random()*0.2}) rotate(${(Math.random()-0.5)*20}deg)`;
-imgElem.style.filter=`brightness(${1+Math.random()*0.5})`;
-} else {
-imgElem.style.transform='scale(1) rotate(0deg)';
-imgElem.style.filter='brightness(1)';
-}
-
-elapsedAnim+=animSpeed;
-if(elapsedAnim>=totalDuration){
-clearInterval(interval);
-const selected=entries[Math.floor(Math.random()*entries.length)];
-imgElem.src=selected.src;
-textElem.textContent=selected.text;
-if (selected.chance <= 0 || selected.chance > 1) {
-chanceElem.textContent = 'Szansa: ???';
-} else {
-chanceElem.textContent = `Szansa: 1/${Math.round(1 / selected.chance)}`;
-}
-
-rarityElem.textContent=`Rzadkość: ${selected.rarity}`;
-let reward=selected.reward;
-if(inventory.length>0) reward=Math.floor(reward*(1+0.05*inventory.length));
-coins+=reward;
-if(historyData[selected.text]) historyData[selected.text]++;
-else historyData[selected.text]=1;
-imgElem.style.transform='scale(1) rotate(0deg)';
-imgElem.style.filter='brightness(1)';
-
-updateUI();
-}
-},animSpeed);
-}
-
-// ===== BUTTONS =====
 document.getElementById('rollButton').addEventListener('click', async ()=>{
-if(!musicStarted){
-currentMusicIndex = 0;
-bgMusic.src = musicFiles[currentMusicIndex];
-try{ await bgMusic.play(); musicStarted=true;}catch(err){console.log(err);}
-}
-rollRNG(true);
+  if(!musicStarted){
+    currentMusicIndex = 0;
+    bgMusic.src = musicFiles[currentMusicIndex];
+    try{ 
+      await bgMusic.play(); 
+      musicStarted=true;
+    } catch(err) {
+      musicStarted=false;
+    }
+  }
+  rollRNG();
 });
 
 document.getElementById('muteButton').addEventListener('click',()=>{ bgMusic.muted=!bgMusic.muted; });
 document.getElementById('volumeControl').addEventListener('input',(e)=>{ bgMusic.volume=e.target.value/100; });
 
-// ===== ULEPSZENIA =====
 document.getElementById('shortenCooldown').addEventListener('click',()=>{
-if(coins>=50 && cooldown>1000){
-coins-=50;
-cooldown=Math.max(1000,cooldown-500);
-updateUI();
-showPopup(`Cooldown skrócony! Teraz ${(cooldown/1000).toFixed(1)}s`, 'success');
-} else if(cooldown <= 1000) {
-showPopup('Nie można już ulepszyć cooldowna!', 'error');
-} else {
-showPopup('Nie masz wystarczająco monet!', 'error');
-}
+  if(coins>=50 && cooldown>1000){ 
+    coins-=50; 
+    cooldown=Math.max(1000,cooldown-500); 
+    updateUI(); 
+    showPopup(`Cooldown skrócony! Teraz ${(cooldown/1000).toFixed(1)}s`, 'success');
+  } else if(cooldown <= 1000) {
+    showPopup('Nie można już ulepszyć cooldowna!', 'error');
+  } else {
+    showPopup('Nie masz wystarczająco monet!', 'error');
+  }
 });
 
 document.getElementById('increaseChances').addEventListener('click',()=>{
-if(coins>=100){
-coins-=100;
-images.forEach(img=>{
-if(img.text === 'Śledziu') return; // Nie modyfikujemy szansy Śledzia
-if(img.text==='gej Śledź' || img.text==='Śledź femboy'){
-img.chance = Math.max(0.01, img.chance*0.95);
-} else {
-img.chance = Math.min(1, Math.round(img.chance*1.05*1000)/1000);
-}
-});
-localStorage.setItem('imagesChances', JSON.stringify(images.map(img=>img.chance)));
-updateUI();
-showPopup('Szanse zostały ulepszone!', 'success');
-} else {
-showPopup('Nie masz wystarczająco monet!', 'error');
-}
+  if(coins>=100){
+    coins-=100;
+    images.forEach(img=>{
+      if(img.text === 'śledziu język') return;
+      if(img.text==='gej śledź' || img.text==='śledź femboy'){
+        img.chance = Math.max(0.01, img.chance*0.95);
+      } else {
+        img.chance = Math.min(1, Math.round(img.chance*1.05*1000)/1000);
+      }
+    });
+    localStorage.setItem('imagesChances', JSON.stringify(images.map(img=>img.chance)));
+    updateUI(); 
+    showPopup('Szanse zostały ulepszone!', 'success');
+  } else {
+    showPopup('Nie masz wystarczająco monet!', 'error');
+  }
 });
 
 document.getElementById('buyItem').addEventListener('click',()=>{
-if(coins>=100){
-if(!inventory.includes('Tajemniczy Przedmiot')){
-coins-=100;
-inventory.push('Tajemniczy Przedmiot');
-updateUI();
-showPopup('Tajemniczy Przedmiot dodany!', 'success');
-} else {
-showPopup('Masz już Tajemniczy Przedmiot!', 'error');
-}
-} else {
-showPopup('Nie masz wystarczająco monet!', 'error');
-}
+  if(coins>=100){
+    if(!inventory.includes('Tajemniczy Przedmiot')){ 
+      coins-=100; 
+      inventory.push('Tajemniczy Przedmiot'); 
+      updateUI(); 
+      showPopup('Tajemniczy Przedmiot dodany!', 'success');
+    } else {
+      showPopup('Masz już Tajemniczy Przedmiot!', 'error');
+    }
+  } else {
+    showPopup('Nie masz wystarczająco monet!', 'error');
+  }
 });
 
 document.getElementById('toggleAutoRoll').addEventListener('click',()=>{
-if(autoRollEnabled){
-clearInterval(autoRollInterval);
-autoRollEnabled=false;
-updateUI();
-showPopup('Auto-Roll wyłączony', 'success');
-} else {
-if(coins>=5000){
-coins-=5000;
-autoRollEnabled=true;
-autoRollInterval=setInterval(()=>rollRNG(true),1500);
-updateUI();
-showPopup('Auto-Roll włączony', 'success');
-} else {
-showPopup('Nie masz wystarczająco monet na Auto-Roll!', 'error');
-}
-}
+  const button = document.getElementById('toggleAutoRoll');
+  
+  // Jeśli jeszcze nie kupiono, wymaga zapłaty
+  if(!autoRollPurchased) {
+    if(coins >= 5000) {
+      coins -= 5000;
+      autoRollPurchased = true;
+      autoRollEnabled = true; // Włącz od razu po zakupie
+      autoRollInterval = setInterval(() => rollRNG(), 1500);
+      localStorage.setItem('autoRollPurchased', autoRollPurchased);
+      localStorage.setItem('autoRollEnabled', autoRollEnabled);
+      button.textContent = 'Wyłącz Auto-Roll';
+      updateUI();
+      showPopup('Auto-Roll zakupiony i włączony!', 'success');
+    } else {
+      showPopup('Nie masz wystarczająco monet na Auto-Roll!', 'error');
+    }
+  } else {
+    // Jeśli już kupiono, działa jako przełącznik
+    if(autoRollEnabled) {
+      // Wyłącz
+      clearInterval(autoRollInterval);
+      autoRollEnabled = false;
+      button.textContent = 'Włącz Auto-Roll';
+      localStorage.setItem('autoRollEnabled', autoRollEnabled);
+      showPopup('Auto-Roll wyłączony', 'success');
+    } else {
+      // Włącz (bez pobierania monet!)
+      autoRollEnabled = true;
+      autoRollInterval = setInterval(() => rollRNG(), 1500);
+      button.textContent = 'Wyłącz Auto-Roll';
+      localStorage.setItem('autoRollEnabled', autoRollEnabled);
+      showPopup('Auto-Roll włączony', 'success');
+    }
+    updateUI();
+  }
 });
 
-// ===== RESET =====
 const resetOverlay = document.getElementById('resetOverlay');
 const resetYes = document.getElementById('resetYes');
 const resetNo = document.getElementById('resetNo');
@@ -604,158 +621,233 @@ document.getElementById('resetProgress').addEventListener('click',()=>{ resetOve
 resetNo.addEventListener('click',()=>{ resetOverlay.style.display='none'; });
 resetYes.addEventListener('click',()=>{ localStorage.clear(); location.reload(); });
 
-// ===== SKLEP =====
 const shopOverlay = document.getElementById('shopOverlay');
 const shopButton = document.getElementById('shopButton');
 const closeShop = document.getElementById('closeShop');
 
 shopButton.addEventListener('click', () => {
-updateShopUI();
-shopOverlay.style.display = 'flex';
+  updateShopUI();
+  shopOverlay.style.display = 'flex';
 });
 
 closeShop.addEventListener('click', () => {
-shopOverlay.style.display = 'none';
+  shopOverlay.style.display = 'none';
 });
 
 function updateShopUI() {
-// Lucky Pawel
-const gej = historyData['gejmingowy Śledź'] || 0;
-const Śledź = historyData['Śledź prezydent'] || 0;
-document.getElementById('req1').textContent = gej;
-document.getElementById('req2').textContent = Śledź;
-document.getElementById('req3').textContent = coins;
+  const gej = historyData['gej śledź'] || 0;
+  const femboy = historyData['śledź femboy'] || 0;
+  document.getElementById('req1').textContent = gej;
+  document.getElementById('req2').textContent = femboy;
+  document.getElementById('req3').textContent = coins;
+  
+  const luckyBtn = document.getElementById('buyLuckySledz');
+  if(ownedShopItems.includes('Lucky Śledź')) {
+    luckyBtn.disabled = true;
+    luckyBtn.textContent = '✓ KUPIONE';
+  } else {
+    luckyBtn.disabled = !(gej >= 20 && femboy >= 10 && coins >= 1000);
+  }
 
-const luckyBtn = document.getElementById('buyLuckyPawel');
-if(ownedShopItems.includes('Lucky Pawel')) {
-luckyBtn.disabled = true;
-luckyBtn.textContent = '✓ KUPIONE';
-} else {
-luckyBtn.disabled = !(gej >= 20 && Śledź >= 10 && coins >= 1000);
+  const nwm = historyData['śledź nwm'] || 0;
+  const patrzacy = historyData['patrzący śledź'] || 0;
+  document.getElementById('req4').textContent = nwm;
+  document.getElementById('req5').textContent = patrzacy;
+  document.getElementById('req6').textContent = coins;
+  
+  const megaBtn = document.getElementById('buyMegaSledz');
+  if(ownedShopItems.includes('Mega Śledź')) {
+    megaBtn.disabled = true;
+    megaBtn.textContent = '✓ KUPIONE';
+  } else {
+    megaBtn.disabled = !(nwm >= 25 && patrzacy >= 15 && coins >= 2500);
+  }
+
+  const anime = historyData['śledź anime'] || 0;
+  const kontroler = historyData['kontroler śledź'] || 0;
+  const sledz67 = historyData['śledź 67'] || 0;
+  const problem = historyData['śledź problem'] || 0;
+  document.getElementById('req7').textContent = anime;
+  document.getElementById('req8').textContent = kontroler;
+  document.getElementById('req9').textContent = sledz67;
+  document.getElementById('req10').textContent = problem;
+  document.getElementById('req11').textContent = coins;
+  
+  const ultimateBtn = document.getElementById('buyUltimateSledz');
+  if(ownedShopItems.includes('Ultimate Śledź')) {
+    ultimateBtn.disabled = true;
+    ultimateBtn.textContent = '✓ KUPIONE';
+  } else {
+    ultimateBtn.disabled = !(anime >= 50 && kontroler >= 20 && sledz67 >= 2 && problem >= 1 && coins >= 5000);
+  }
 }
 
-// Mega Śledź
-const zolty = historyData['pawel w zoltym hoodie'] || 0;
-const funni = historyData['funni Śledź'] || 0;
-document.getElementById('req4').textContent = zolty;
-document.getElementById('req5').textContent = funni;
-document.getElementById('req6').textContent = coins;
-
-const megaBtn = document.getElementById('buyMegaŚledź');
-if(ownedShopItems.includes('Mega Śledź')) {
-megaBtn.disabled = true;
-megaBtn.textContent = '✓ KUPIONE';
-} else {
-megaBtn.disabled = !(Anime >= 25 && nwm >= 15 && coins >= 2500);
-}
-
-// Ultimate Śledź
-const ok = historyData['Śledź j'] || 0;
-const swiateczny = historyData['gej Śledź'] || 0;
-const backshoty = historyData['Śledź femboy'] || 0;
-const komunista = historyData['Śledź nwm'] || 0;
-document.getElementById('req7').textContent = ok;
-document.getElementById('req8').textContent = gej;
-document.getElementById('req9').textContent = femboy;
-document.getElementById('req10').textContent = kontroler;
-document.getElementById('req11').textContent = coins;
-
-const ultimateBtn = document.getElementById('buyUltimatePawel');
-if(ownedShopItems.includes('Ultimate Pawel')) {
-ultimateBtn.disabled = true;
-ultimateBtn.textContent = '✓ KUPIONE';
-} else {
-ultimateBtn.disabled = !(ok >= 50 && swiateczny >= 20 && backshoty >= 2 && komunista >= 1 && coins >= 5000);
-}
-}
-
-document.getElementById('buyLuckyPawel').addEventListener('click', () => {
-const gejmingowy = historyData['gejmingowy Śledź'] || 0;
-const prezydent = historyData['Śledź prezydent'] || 0;
-
-if(gejmingowy >= 20 && femboy >= 10 && coins >= 1000 && !ownedShopItems.includes('Lucky Śledź')) {
-historyData['gej Śledź'] -= 20;
-historyData['Śledź femboy'] -= 10;
-coins -= 1000;
-luckMultiplier *= 1.5;
-ownedShopItems.push('Lucky Śledź');
-
-localStorage.setItem('luckMultiplier', luckMultiplier);
-localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
-
-updateUI();
-updateShopUI();
-showPopup('🍀 Lucky Pawel zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
-} else {
-showPopup('Brak wymaganych zasobów!', 'error');
-}
+document.getElementById('buyLuckySledz').addEventListener('click', () => {
+  const gej = historyData['gej śledź'] || 0;
+  const femboy = historyData['śledź femboy'] || 0;
+  
+  if(gej >= 20 && femboy >= 10 && coins >= 1000 && !ownedShopItems.includes('Lucky Śledź')) {
+    historyData['gej śledź'] -= 20;
+    historyData['śledź femboy'] -= 10;
+    coins -= 1000;
+    luckMultiplier *= 1.5;
+    ownedShopItems.push('Lucky Śledź');
+    
+    localStorage.setItem('luckMultiplier', luckMultiplier);
+    localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
+    
+    updateUI();
+    updateShopUI();
+    showPopup('🍀 Lucky Śledź zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
+  } else {
+    showPopup('Brak wymaganych zasobów!', 'error');
+  }
 });
 
-document.getElementById('buyMegaSledź').addEventListener('click', () => {
-const gej = historyData['Śledź gej'] || 0;
-const funni = historyData['Śledź'] || 0;
-
-if(zolty >= 25 && funni >= 15 && coins >= 2500 && !ownedShopItems.includes('Mega Pawel')) {
-historyData['nwm Śledź'] -= 25;
-historyData['Śledź kontroler'] -= 15;
-coins -= 2500;
-luckMultiplier *= 2;
-ownedShopItems.push('MegaŚledź');
-
-localStorage.setItem('luckMultiplier', luckMultiplier);
-localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
-
-updateUI();
-updateShopUI();
-showPopup('💎 Mega Śledź zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
-} else {
-showPopup('Brak wymaganych zasobów!', 'error');
-}
+document.getElementById('buyMegaSledz').addEventListener('click', () => {
+  const nwm = historyData['śledź nwm'] || 0;
+  const patrzacy = historyData['patrzący śledź'] || 0;
+  
+  if(nwm >= 25 && patrzacy >= 15 && coins >= 2500 && !ownedShopItems.includes('Mega Śledź')) {
+    historyData['śledź nwm'] -= 25;
+    historyData['patrzący śledź'] -= 15;
+    coins -= 2500;
+    luckMultiplier *= 2;
+    ownedShopItems.push('Mega Śledź');
+    
+    localStorage.setItem('luckMultiplier', luckMultiplier);
+    localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
+    
+    updateUI();
+    updateShopUI();
+    showPopup('💎 Mega Śledź zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
+  } else {
+    showPopup('Brak wymaganych zasobów!', 'error');
+  }
 });
 
-document.getElementById('buyUltimateŚledź').addEventListener('click', () => {
-const ok = historyData['Śledź ok'] || 0;
-const swiateczny = historyData['świąteczny Śledź'] || 0;
-const backshoty = historyData['Śledź dostaje backshoty'] || 0;
-const komunista = historyData['Śledź komunista'] || 0;
-
-if(ok >= 50 && swiateczny >= 20 && backshoty >= 2 && komunista >= 1 && coins >= 5000 && !ownedShopItems.includes('Ultimate Pawel')) {
-historyData['Śledź ok'] -= 50;
-historyData['świąteczny Śledź'] -= 20;
-historyData['Śledź dostaje backshoty'] -= 2;
-historyData['Śledź komunista'] -= 1;
-coins -= 5000;
-luckMultiplier *= 3;
-ownedShopItems.push('Ultimate Śledź');
-
-localStorage.setItem('luckMultiplier', luckMultiplier);
-localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
-
-updateUI();
-updateShopUI();
-showPopup('👑 Ultimate Śledź zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
-} else {
-showPopup('Brak wymaganych zasobów!', 'error');
-}
+document.getElementById('buyUltimateSledz').addEventListener('click', () => {
+  const anime = historyData['śledź anime'] || 0;
+  const kontroler = historyData['kontroler śledź'] || 0;
+  const sledz67 = historyData['śledź 67'] || 0;
+  const problem = historyData['śledź problem'] || 0;
+  
+  if(anime >= 50 && kontroler >= 20 && sledz67 >= 2 && problem >= 1 && coins >= 5000 && !ownedShopItems.includes('Ultimate Śledź')) {
+    historyData['śledź anime'] -= 50;
+    historyData['kontroler śledź'] -= 20;
+    historyData['śledź 67'] -= 2;
+    historyData['śledź problem'] -= 1;
+    coins -= 5000;
+    luckMultiplier *= 3;
+    ownedShopItems.push('Ultimate Śledź');
+    
+    localStorage.setItem('luckMultiplier', luckMultiplier);
+    localStorage.setItem('ownedShopItems', JSON.stringify(ownedShopItems));
+    
+    updateUI();
+    updateShopUI();
+    showPopup('👑 Ultimate Śledź zakupiony! Mnożnik: ' + luckMultiplier.toFixed(2) + 'x', 'success');
+  } else {
+    showPopup('Brak wymaganych zasobów!', 'error');
+  }
 });
-// ===== AUTO-SAVE & PLAYTIME UPDATE =====
+
+const questsOverlay = document.getElementById('questsOverlay');
+const questsButton = document.getElementById('questsButton');
+const closeQuests = document.getElementById('closeQuests');
+
+questsButton.addEventListener('click', () => {
+  updateQuestsUI();
+  questsOverlay.style.display = 'flex';
+});
+
+closeQuests.addEventListener('click', () => {
+  questsOverlay.style.display = 'none';
+});
+
+const codesOverlay = document.getElementById('codesOverlay');
+const codesButton = document.getElementById('codesButton');
+const closeCodes = document.getElementById('closeCodes');
+const submitCode = document.getElementById('submitCode');
+const codeInput = document.getElementById('codeInput');
+
+codesButton.addEventListener('click', () => {
+  updateCodesUI();
+  codesOverlay.style.display = 'flex';
+});
+
+closeCodes.addEventListener('click', () => {
+  codesOverlay.style.display = 'none';
+});
+
+submitCode.addEventListener('click', () => {
+  const code = codeInput.value.toUpperCase().trim();
+  
+  if(!code) {
+    showPopup('Wpisz kod!', 'error');
+    return;
+  }
+  
+  if(usedCodes.includes(code)) {
+    showPopup('Ten kod został już użyty!', 'error');
+    return;
+  }
+  
+  if(promoCodes[code]) {
+    coins += promoCodes[code];
+    usedCodes.push(code);
+    localStorage.setItem('usedCodes', JSON.stringify(usedCodes));
+    updateUI();
+    updateCodesUI();
+    showPopup(`✨ Kod aktywowany! +${promoCodes[code]} monet`, 'success');
+    codeInput.value = '';
+  } else {
+    showPopup('Nieprawidłowy kod!', 'error');
+  }
+});
+
+function updateCodesUI() {
+  const usedCodesList = document.getElementById('usedCodesList');
+  
+  if(usedCodes.length === 0) {
+    usedCodesList.textContent = 'Brak użytych kodów';
+  } else {
+    usedCodesList.innerHTML = '';
+    usedCodes.forEach(code => {
+      const codeDiv = document.createElement('div');
+      codeDiv.className = 'codeHistoryItem';
+      codeDiv.textContent = `${code} - ${promoCodes[code]} monet`;
+      usedCodesList.appendChild(codeDiv);
+    });
+  }
+}
+
 setInterval(()=>{
-playTime += 1; // Dodaj 1 sekundę
-document.getElementById('statsPlayTime').textContent = playTime+'s'; // Aktualizuj UI
-localStorage.setItem('playTime', playTime);
-localStorage.setItem('autoRollEnabled', autoRollEnabled);
+  playTime += 1;
+  document.getElementById('statsPlayTime').textContent = playTime+'s';
+  localStorage.setItem('playTime', playTime);
+  localStorage.setItem('autoRollEnabled', autoRollEnabled);
+  localStorage.setItem('autoRollPurchased', autoRollPurchased);
 }, 1000);
 
-
-// ===== INIT =====
 updateUI();
 
-// Przywróć auto-roll jeśli było włączone
-if(autoRollEnabled) {
-autoRollInterval = setInterval(() => rollRNG(true), 1500);
+// Ustaw poprawny tekst przycisku Auto-Roll przy starcie
+const autoRollButton = document.getElementById('toggleAutoRoll');
+if(autoRollPurchased) {
+  if(autoRollEnabled) {
+    autoRollButton.textContent = 'Wyłącz Auto-Roll';
+  } else {
+    autoRollButton.textContent = 'Włącz Auto-Roll';
+  }
+} else {
+  autoRollButton.textContent = 'Kup Auto-Roll 5000 monet';
 }
 
-// Inicjalizacja głośności
+if(autoRollEnabled) {
+  autoRollInterval = setInterval(() => rollRNG(), 1500);
+}
+
 bgMusic.volume = document.getElementById('volumeControl').value / 100;
 </script>
 </body>
